@@ -1,121 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+// src/App.jsx
+import { useState } from 'react';
+import styles from './App.module.css'; // Import our new styles
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [jsonInput, setJsonInput] = useState('');
+  const [tsOutput, setTsOutput] = useState('');
+
+  const generateInterface = () => {
+    try {
+      const parsed = JSON.parse(jsonInput);
+      let result = "interface GeneratedInterface {\n";
+
+      for (const key in parsed) {
+        const value = parsed[key];
+        
+        if (Array.isArray(value)) {
+          // Check the first item to see what's in the list
+          const innerType = value.length > 0 ? typeof value[0] : 'any';
+          result += `  ${key}: ${innerType}[];\n`;
+        } else {
+          result += `  ${key}: ${typeof value};\n`;
+        }
+      }
+
+      result += "}";
+      setTsOutput(result);
+    } catch (e) {
+      setTsOutput("// Error: Please provide valid JSON");
+    }
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
+    <div className={styles.container}>
+      <h1 className={styles.title}>JSON → TypeScript</h1>
+      
+      <div className={styles.editorGrid}>
         <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
+          <label>Input JSON</label>
+          <textarea 
+            className={styles.textarea}
+            placeholder='{ "id": 1, "tags": ["tech", "web"] }'
+            onChange={(e) => setJsonInput(e.target.value)}
+          />
         </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+        
+        <div>
+          <label>Output Interface</label>
+          <pre className={styles.output}>
+            {tsOutput || "// Output will appear here..."}
+          </pre>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      </div>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <button className={styles.button} onClick={generateInterface}>
+        Transform Data
+      </button>
+    </div>
+  );
 }
 
-export default App
+export default App;
