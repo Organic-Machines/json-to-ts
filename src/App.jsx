@@ -10,7 +10,6 @@ function App() {
     try {
       const parsed = JSON.parse(jsonInput);
       let result = "interface GeneratedInterface {\n";
-
       for (const key in parsed) {
         const value = parsed[key];
         if (Array.isArray(value)) {
@@ -20,10 +19,9 @@ function App() {
           result += `  ${key}: ${typeof value};\n`;
         }
       }
-
       result += "}";
       setTsOutput(result);
-      setCopySuccess(false); // Reset copy status when generating new code
+      setCopySuccess(false);
     } catch (e) {
       setTsOutput("// Error: Please provide valid JSON");
     }
@@ -31,11 +29,8 @@ function App() {
 
   const handleCopy = async () => {
     if (!tsOutput || tsOutput.startsWith("//")) return;
-    
     await navigator.clipboard.writeText(tsOutput);
     setCopySuccess(true);
-    
-    // Reset the "Copied!" text back to "Copy" after 2 seconds
     setTimeout(() => setCopySuccess(false), 2000);
   };
 
@@ -44,6 +39,7 @@ function App() {
       <h1 className={styles.title}>JSON → TypeScript</h1>
       
       <div className={styles.editorGrid}>
+        {/* Left Column: Input */}
         <div className={styles.column}>
           <label className={styles.label}>Input JSON</label>
           <textarea 
@@ -51,24 +47,26 @@ function App() {
             placeholder='{ "id": 1, "tags": ["tech"] }'
             onChange={(e) => setJsonInput(e.target.value)}
           />
+          <button className={`${styles.actionButton} ${styles.transformBtn}`} onClick={generateInterface}>
+            Transform Data
+          </button>
         </div>
         
+        {/* Right Column: Output */}
         <div className={styles.column}>
           <label className={styles.label}>Output Interface</label>
           <pre className={styles.output}>
             {tsOutput || "// Output will appear here..."}
           </pre>
-          {tsOutput && !tsOutput.startsWith("//") && (
-            <button className={styles.copyButton} onClick={handleCopy}>
-              {copySuccess ? "✓ Copied!" : "Copy to Clipboard"}
-            </button>
-          )}
+          <button 
+            className={`${styles.actionButton} ${styles.copyBtn}`} 
+            onClick={handleCopy}
+            disabled={!tsOutput || tsOutput.startsWith("//")}
+          >
+            {copySuccess ? "✓ Copied!" : "Copy to Clipboard"}
+          </button>
         </div>
       </div>
-
-      <button className={styles.button} onClick={generateInterface}>
-        Transform Data
-      </button>
     </div>
   );
 }

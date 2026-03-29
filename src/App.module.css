@@ -1,10 +1,26 @@
-/* Update these specific parts in App.module.css */
+/* App.module.css */
+
+.container {
+  max-width: 1000px; /* Widened slightly to accommodate margins */
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 24px;
+}
 
 .editorGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  align-items: start; /* This forces both columns to start at the exact same top pixel */
+  align-items: start;
 }
 
 .column {
@@ -20,37 +36,64 @@
   margin-bottom: 8px;
 }
 
-/* Ensure the pre tag matches the textarea's sizing behavior */
+/* Input specific tweaks */
+.textarea {
+  height: 300px; /* Symmetrical starting height */
+  margin-left: 10px; /* Requested margin */
+  padding: 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-family: 'Fira Code', monospace;
+  resize: vertical; /* Disables horizontal resizing */
+  box-sizing: border-box; 
+}
+
+/* Output specific tweaks */
 .output {
-  margin-top: 0; /* Removes default browser margins */
+  height: 300px; /* Symmetrical starting height */
+  margin-right: 10px; /* Requested margin */
+  margin-top: 0;
   background-color: #f8fafc;
   padding: 12px;
-  border-radius: 8px;
   border: 2px solid #e2e8f0;
-  overflow-x: auto;
-  min-height: 300px;
+  border-radius: 8px;
   font-family: 'Fira Code', monospace;
   font-size: 13px;
-  white-space: pre-wrap; /* Keeps the code formatted nicely */
+  white-space: pre-wrap;
+  overflow: auto; 
+  resize: vertical; /* Allows manual height adjustment for output */
+  box-sizing: border-box;
 }
 
-.copyButton {
-  margin-top: 10px;
-  background-color: #10b981; /* Green color */
-  color: white;
-  border: none;
-  padding: 8px 16px;
+/* Shared button styling for symmetry */
+.actionButton {
+  margin-top: 12px;
+  padding: 10px 20px;
   border-radius: 6px;
+  border: none;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: 500;
-  transition: opacity 0.2s;
+  transition: transform 0.1s, background-color 0.2s;
+  width: fit-content; /* Anchors it to the text size rather than full width */
 }
 
-.copyButton:hover {
-  opacity: 0.9;
+.actionButton:active {
+  transform: scale(0.98);
 }
 
-.copyButton:disabled {
+.transformBtn {
+  background-color: #2563eb;
+  color: white;
+  margin-left: 10px; /* Matches the input margin */
+}
+
+.copyBtn {
+  background-color: #10b981;
+  color: white;
+  margin-right: 10px; /* Matches the output margin */
+  align-self: flex-end; /* Pushes it to the right of the column */
+}
+
+.copyBtn:disabled {
   background-color: #94a3b8;
-  cursor: not-allowed;
 }
