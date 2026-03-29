@@ -1,16 +1,27 @@
-# React + Vite
+# 🛠️ JSON to TypeScript Interface Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight, browser-based utility designed to transform raw JSON objects into clean, production-ready TypeScript interfaces. Built with speed and developer efficiency in mind.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* **Instant Transformation:** Convert complex JSON structures into TypeScript definitions with one click.
+* **Array Support:** Automatically detects array types (e.g., `string[]`, `number[]`).
+* **Symmetrical UI:** A balanced, side-by-side editor layout for input and output.
+* **Vertical Resizing:** Custom-tuned text areas that allow vertical growth without breaking the grid layout.
+* **Copy to Clipboard:** One-tap export of generated interfaces with success feedback.
+* **Zero-Configuration Styling:** Uses CSS Modules for encapsulated, conflict-free design.
 
-## React Compiler
+## 🚀 Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **Framework:** [React](https://reactjs.org/)
+* **Build Tool:** [Vite](https://vitejs.dev/)
+* **Styling:** CSS Modules (Standard CSS)
+* **Version Control:** Git & GitHub
 
-## Expanding the ESLint configuration
+## 🛠️ Installation & Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+If you want to run this project locally, follow these steps:
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/YOUR_USERNAME/json-to-ts.git](https://github.com/YOUR_USERNAME/json-to-ts.git)
