@@ -1,54 +1,28 @@
-/* src/App.module.css */
-.container {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
-  font-family: 'Inter', system-ui, sans-serif;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-.title {
-  color: #1a1a1a;
-  text-align: center;
-  margin-bottom: 24px;
-}
+/* Update these specific parts in App.module.css */
 
 .editorGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+  align-items: start; /* This forces both columns to start at the exact same top pixel */
 }
 
-.textarea {
-  width: 100%;
-  height: 300px;
-  padding: 12px;
-  border: 2px solid #e2e8f0;
-  border-radius: 8px;
-  font-family: 'Fira Code', monospace;
-  resize: vertical;
+.column {
+  display: flex;
+  flex-direction: column;
 }
 
-.button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 16px;
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 8px;
+.label {
+  display: block;
+  font-size: 0.875rem;
   font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
+  color: #64748b;
+  margin-bottom: 8px;
 }
 
-.button:hover {
-  background-color: #1d4ed8;
-}
-
+/* Ensure the pre tag matches the textarea's sizing behavior */
 .output {
+  margin-top: 0; /* Removes default browser margins */
   background-color: #f8fafc;
   padding: 12px;
   border-radius: 8px;
@@ -56,4 +30,27 @@
   overflow-x: auto;
   min-height: 300px;
   font-family: 'Fira Code', monospace;
+  font-size: 13px;
+  white-space: pre-wrap; /* Keeps the code formatted nicely */
+}
+
+.copyButton {
+  margin-top: 10px;
+  background-color: #10b981; /* Green color */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.copyButton:hover {
+  opacity: 0.9;
+}
+
+.copyButton:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
 }
